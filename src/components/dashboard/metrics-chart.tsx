@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 ChartJS.register(
   CategoryScale,
@@ -165,26 +166,20 @@ export function MetricsChart({ data }: MetricsChartProps) {
       <p className="text-2xl font-bold mb-4">Web Vitals</p>
       <div className="flex flex-wrap gap-2 mb-4 justify-center">
         {chartData.datasets.map((dataset) => (
-          <button
+          <Button
             key={dataset.label}
             onClick={() => dataset.label && toggleDataset(dataset.label)}
-            className={`
-              px-4 py-2 rounded-lg text-sm font-medium transition-all
-              ${
-                visibleDatasets[dataset.label || ""]
-                  ? "bg-gray-100 text-gray-900 hover:bg-gray-200"
-                  : "bg-gray-50 text-gray-400 hover:bg-gray-100"
-              }
-              border border-gray-200
-              flex items-center gap-2
-            `}
+            variant={
+              visibleDatasets[dataset.label || ""] ? "secondary" : "ghost"
+            }
+            className="border border-gray-200"
           >
             <span
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: dataset.borderColor }}
             />
             {dataset.label}
-          </button>
+          </Button>
         ))}
       </div>
       <Line data={filteredChartData} options={options} />
