@@ -3,7 +3,7 @@ import { MetricsChart } from "@/components/dashboard/metrics-chart";
 
 export default function Home() {
   return (
-    <main className="container mx-auto p-4">
+    <main className="mx-auto p-8">
       <DashboardHeader />
       <div className="mt-8">
         <MetricsChart
