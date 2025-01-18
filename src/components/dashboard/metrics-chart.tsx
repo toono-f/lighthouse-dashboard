@@ -27,7 +27,7 @@ ChartJS.register(
 );
 
 type MetricsData = {
-  timestamp: string;
+  measuredAt: string;
   lcp: number; // Largest Contentful Paint
   fid: number; // First Input Delay
   cls: number; // Cumulative Layout Shift
@@ -57,7 +57,7 @@ export function MetricsChart({ data }: MetricsChartProps) {
   });
 
   const labels = data.map((item) => {
-    const date = new Date(item.timestamp);
+    const date = new Date(item.measuredAt);
     return date.toLocaleDateString("ja-JP");
   });
 

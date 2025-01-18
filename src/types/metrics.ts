@@ -1,5 +1,5 @@
 type MetricsData = {
-  timestamp: string;
+  measuredAt: string;
   lcp: number;
   fid: number;
   cls: number;
