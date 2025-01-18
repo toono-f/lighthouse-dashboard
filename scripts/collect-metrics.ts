@@ -24,11 +24,13 @@ async function collectMetrics() {
         .values({
           pageId: target.pageId,
           pageName: target.pageName,
+          pageUrl: target.url,
         })
         .onConflictDoUpdate({
           target: pages.pageId,
           set: {
             pageName: target.pageName,
+            pageUrl: target.url,
             updatedAt: new Date(),
           },
         });

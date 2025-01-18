@@ -1,5 +1,6 @@
 type MetricsData = {
   measuredAt: string;
+  pageUrl: string;
   lcp: number;
   fid: number;
   cls: number;

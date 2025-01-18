@@ -12,6 +12,7 @@ export const pages = pgTable("pages", {
   id: serial("id").primaryKey(),
   pageId: varchar("page_id", { length: 50 }).unique().notNull(),
   pageName: text("page_name").notNull(),
+  pageUrl: text("page_url").unique().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

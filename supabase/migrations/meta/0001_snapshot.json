@@ -1,0 +1,159 @@
+{
+  "id": "e5175be6-f2d2-4482-a797-e6310f202b19",
+  "prevId": "86aa0819-6c90-40a3-a569-9c1b2710f7b5",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.metrics": {
+      "name": "metrics",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "page_id": {
+          "name": "page_id",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "measured_at": {
+          "name": "measured_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lcp": {
+          "name": "lcp",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fid": {
+          "name": "fid",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cls": {
+          "name": "cls",
+          "type": "numeric(5, 3)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ttfb": {
+          "name": "ttfb",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "inp": {
+          "name": "inp",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fcp": {
+          "name": "fcp",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pages": {
+      "name": "pages",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "page_id": {
+          "name": "page_id",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "page_name": {
+          "name": "page_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "page_url": {
+          "name": "page_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "pages_page_id_unique": {
+          "name": "pages_page_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "page_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

@@ -21,6 +21,7 @@ export default async function Home() {
       return {
         pageId: page.pageId,
         pageName: page.pageName,
+        pageUrl: page.pageUrl,
         data: metricsData.map((metric) => ({
           measuredAt: metric.measuredAt.toISOString(),
           lcp: Number(metric.lcp),
@@ -40,6 +41,7 @@ export default async function Home() {
       {pageMetrics.map((pageMetric) => (
         <div key={pageMetric.pageId} className="mt-8">
           <h2 className="text-xl font-semibold mb-4">{pageMetric.pageName}</h2>
+          <p className="text-sm text-gray-500 mb-4">{pageMetric.pageUrl}</p>
           <MetricsChart data={pageMetric.data} />
         </div>
       ))}
