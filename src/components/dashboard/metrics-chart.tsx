@@ -68,37 +68,49 @@ export function MetricsChart({ data }: MetricsChartProps) {
         label: "LCP (ms)",
         data: data.map((item) => item.lcp),
         borderColor: "rgb(255, 99, 132)",
-        tension: 0.1,
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        tension: 0.4,
+        borderWidth: 2.5,
       },
       {
         label: "FID (ms)",
         data: data.map((item) => item.fid),
-        borderColor: "rgb(54, 162, 235)",
-        tension: 0.1,
+        borderColor: "rgb(75, 192, 255)",
+        backgroundColor: "rgba(75, 192, 255, 0.2)",
+        tension: 0.4,
+        borderWidth: 2.5,
       },
       {
         label: "CLS",
         data: data.map((item) => item.cls),
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
+        borderColor: "rgb(75, 220, 192)",
+        backgroundColor: "rgba(75, 220, 192, 0.2)",
+        tension: 0.4,
+        borderWidth: 2.5,
       },
       {
         label: "TTFB (ms)",
         data: data.map((item) => item.ttfb),
         borderColor: "rgb(153, 102, 255)",
-        tension: 0.1,
+        backgroundColor: "rgba(153, 102, 255, 0.2)",
+        tension: 0.4,
+        borderWidth: 2.5,
       },
       {
         label: "INP (ms)",
         data: data.map((item) => item.inp),
         borderColor: "rgb(255, 159, 64)",
-        tension: 0.1,
+        backgroundColor: "rgba(255, 159, 64, 0.2)",
+        tension: 0.4,
+        borderWidth: 2.5,
       },
       {
         label: "FCP (ms)",
         data: data.map((item) => item.fcp),
-        borderColor: "rgb(255, 205, 86)",
-        tension: 0.1,
+        borderColor: "rgb(72, 192, 72)",
+        backgroundColor: "rgba(72, 192, 72, 0.2)",
+        tension: 0.4,
+        borderWidth: 2.5,
       },
     ],
   };
@@ -108,10 +120,23 @@ export function MetricsChart({ data }: MetricsChartProps) {
     plugins: {
       legend: {
         labels: {
-          generateLabels: () => [], // カスタムレジェンドを使用するため、デフォルトのレジェンドを非表示
+          generateLabels: () => [],
         },
       },
       tooltip: {
+        backgroundColor: "rgba(255, 255, 255, 0.95)",
+        titleColor: "#333",
+        bodyColor: "#333",
+        borderColor: "rgba(0, 0, 0, 0.1)",
+        borderWidth: 1,
+        padding: 12,
+        cornerRadius: 8,
+        titleFont: {
+          weight: "bold",
+        },
+        bodyFont: {
+          size: 13,
+        },
         callbacks: {
           label: function (context: TooltipItem<"line">) {
             const label = context.dataset.label || "";
@@ -126,12 +151,26 @@ export function MetricsChart({ data }: MetricsChartProps) {
       y: {
         beginAtZero: true,
         grid: {
-          color: "rgba(0, 0, 0, 0.1)",
+          color: "rgba(0, 0, 0, 0.08)",
+        },
+        ticks: {
+          color: "#666",
+          padding: 8,
+          font: {
+            size: 11,
+          },
         },
       },
       x: {
         grid: {
           display: false,
+        },
+        ticks: {
+          color: "#666",
+          padding: 8,
+          font: {
+            size: 11,
+          },
         },
       },
     },
@@ -142,6 +181,10 @@ export function MetricsChart({ data }: MetricsChartProps) {
     hover: {
       mode: "index",
       intersect: false,
+    },
+    animation: {
+      duration: 1000,
+      easing: "easeInOutQuart",
     },
   };
 
@@ -162,9 +205,11 @@ export function MetricsChart({ data }: MetricsChartProps) {
   };
 
   return (
-    <div className="w-full p-8 bg-white rounded-lg shadow-sm">
-      <p className="text-2xl font-bold mb-4">Web Vitals</p>
-      <div className="flex flex-wrap gap-2 mb-4 justify-center">
+    <div className="w-full p-8 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
+      <p className="text-2xl font-bold mb-6 text-gray-700 text-center">
+        Web Vitals
+      </p>
+      <div className="flex flex-wrap gap-3 mb-6 justify-center">
         {chartData.datasets.map((dataset) => (
           <Button
             key={dataset.label}
@@ -172,13 +217,21 @@ export function MetricsChart({ data }: MetricsChartProps) {
             variant={
               visibleDatasets[dataset.label || ""] ? "secondary" : "ghost"
             }
-            className="border border-gray-200"
+            className={`
+              border transition-all duration-200
+              ${
+                visibleDatasets[dataset.label || ""]
+                  ? "border-gray-200 shadow-sm hover:shadow"
+                  : "border-gray-100"
+              }
+              hover:scale-105
+            `}
           >
             <span
-              className="w-3 h-3 rounded-full"
+              className="w-3 h-3 rounded-full mr-2"
               style={{ backgroundColor: dataset.borderColor }}
             />
-            {dataset.label}
+            <span className="text-sm">{dataset.label}</span>
           </Button>
         ))}
       </div>
