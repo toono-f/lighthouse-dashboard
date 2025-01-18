@@ -6,9 +6,9 @@ export type LighthouseTarget = {
 
 export const lighthouseTargets: LighthouseTarget[] = [
   {
-    pageId: "home",
-    pageName: "ホームページ",
-    url: "https://example.com",
+    pageId: "zenn",
+    pageName: "Zenn",
+    url: "https://zenn.dev/",
   },
   // TODO: 他の計測対象ページをここに追加
 ];
