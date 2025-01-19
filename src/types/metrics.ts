@@ -15,4 +15,10 @@ type PageMetrics = {
   data: MetricsData[];
 };
 
-export type { MetricsData, PageMetrics };
+type LighthouseTarget = {
+  pageId: string;
+  pageName: string;
+  pageUrl: string;
+};
+
+export type { MetricsData, PageMetrics, LighthouseTarget };

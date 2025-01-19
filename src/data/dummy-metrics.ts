@@ -18,6 +18,8 @@ const generateWeekData = (baseValues: {
 
     return {
       timestamp: date.toISOString().split("T")[0] + "T00:00:00",
+      measuredAt: date.toISOString(),
+      pageUrl: "https://example.com",
       lcp: Math.round(baseValues.lcp * randomVariation()),
       fid: Math.round(baseValues.fid * randomVariation()),
       cls: Number((baseValues.cls * randomVariation()).toFixed(3)),

@@ -1,10 +1,10 @@
 import lighthouse from "lighthouse";
 import * as chromeLauncher from "chrome-launcher";
-import { lighthouseTargets } from "../src/config/lighthouse-targets.js";
 import { db } from "../src/lib/db.js";
 import { metrics, pages } from "../src/lib/schema.js";
 
-// TODO: 本処理はvercelで実行できないため、Next.js側で、ビルド時にlighthouse apiを利用して取得する方向性に変更したい
+// Next.jsでpagespeed insights apiを利用して取得する方向性に変更したため、このスクリプトは不要になった
+// メトリクスを収集するためのスクリプトとして残しておく
 async function collectMetrics() {
   const chrome = await chromeLauncher.launch({ chromeFlags: ["--headless"] });
   const options = {
@@ -69,3 +69,18 @@ if (import.meta.url === new URL(import.meta.url).href) {
       process.exit(1);
     });
 }
+
+type LighthouseTarget = {
+  pageId: string;
+  pageName: string;
+  url: string;
+};
+
+const lighthouseTargets: LighthouseTarget[] = [
+  {
+    pageId: "zenn",
+    pageName: "Zenn",
+    url: "https://zenn.dev/",
+  },
+  // 他の計測対象ページをここに追加
+];
