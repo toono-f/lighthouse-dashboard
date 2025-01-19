@@ -15,6 +15,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { MetricsData } from "@/types/metrics";
 
 ChartJS.register(
   CategoryScale,
@@ -26,26 +27,15 @@ ChartJS.register(
   Legend
 );
 
-type MetricsData = {
-  measuredAt: string;
-  lcp: number; // Largest Contentful Paint
-  fid: number; // First Input Delay
-  cls: number; // Cumulative Layout Shift
-  ttfb: number; // Time to First Byte
-  inp: number; // Interaction to Next Paint
-  fcp: number; // First Contentful Paint
-};
-
-// 新しい型を追加
-type DatasetVisibility = {
-  [key: string]: boolean;
-};
-
 type MetricsChartProps = {
   data: MetricsData[];
 };
 
-export function MetricsChart({ data }: MetricsChartProps) {
+type DatasetVisibility = {
+  [key: string]: boolean;
+};
+
+export const MetricsChart = ({ data }: MetricsChartProps) => {
   // データセットの表示状態を管理するuseState
   const [visibleDatasets, setVisibleDatasets] = useState<DatasetVisibility>({
     "LCP (ms)": true,
@@ -238,4 +228,4 @@ export function MetricsChart({ data }: MetricsChartProps) {
       <Line data={filteredChartData} options={options} />
     </div>
   );
-}
+};

@@ -34,6 +34,7 @@ export const dummyMetricsData: PageMetrics[] = [
   {
     pageId: "home",
     pageName: "ホームページ",
+    pageUrl: "https://example.com",
     data: generateWeekData({
       lcp: 2500,
       fid: 100,
@@ -46,6 +47,7 @@ export const dummyMetricsData: PageMetrics[] = [
   {
     pageId: "about",
     pageName: "会社概要",
+    pageUrl: "https://example.com/about",
     data: generateWeekData({
       lcp: 1800,
       fid: 80,
@@ -58,6 +60,7 @@ export const dummyMetricsData: PageMetrics[] = [
   {
     pageId: "products",
     pageName: "製品一覧",
+    pageUrl: "https://example.com/products",
     data: generateWeekData({
       lcp: 3000,
       fid: 120,
@@ -70,6 +73,7 @@ export const dummyMetricsData: PageMetrics[] = [
   {
     pageId: "contact",
     pageName: "お問い合わせ",
+    pageUrl: "https://example.com/contact",
     data: generateWeekData({
       lcp: 2000,
       fid: 90,
@@ -82,6 +86,7 @@ export const dummyMetricsData: PageMetrics[] = [
   {
     pageId: "blog",
     pageName: "ブログ",
+    pageUrl: "https://example.com/blog",
     data: generateWeekData({
       lcp: 2800,
       fid: 110,

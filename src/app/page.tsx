@@ -2,21 +2,9 @@ import { DashboardHeader } from "@/components/dashboard/header";
 import { MetricsChart } from "@/components/dashboard/metrics-chart";
 import { db } from "@/lib/db";
 import { metrics } from "@/lib/schema";
-import { LighthouseTarget } from "@/types/metrics";
+import { ApiMetric, LighthouseTarget, PageMetrics } from "@/types/metrics";
 import { desc, eq } from "drizzle-orm";
 import { syncLighthouseTargets } from "@/config/lighthouse-targets";
-
-type Metric = {
-  pageId: string;
-  pageName: string;
-  pageUrl: string;
-  lcp: number;
-  fid: number;
-  cls: number;
-  ttfb: number;
-  inp: number;
-  fcp: number;
-};
 
 export default async function Home() {
   // ページ情報をDBに同期してから取得
@@ -27,7 +15,7 @@ export default async function Home() {
 
   // Supabaseにメトリクスを保存
   await Promise.all(
-    apiMetrics.map(async (metric: Metric) => {
+    apiMetrics.map(async (metric: ApiMetric) => {
       await db.insert(metrics).values({
         pageId: metric.pageId,
         measuredAt: new Date(),
@@ -42,7 +30,7 @@ export default async function Home() {
   );
 
   // 各ページの最新のメトリクスデータを取得
-  const pageMetrics = await Promise.all(
+  const pageMetrics: PageMetrics[] = await Promise.all(
     targets.map(async (page) => {
       const metricsData = await db
         .select()
@@ -82,9 +70,9 @@ export default async function Home() {
   );
 }
 
-const collectMetrics: (
+const collectMetrics = async (
   targets: LighthouseTarget[]
-) => Promise<Metric[]> = async (targets: LighthouseTarget[]) => {
+): Promise<ApiMetric[]> => {
   const metrics = await Promise.all(
     targets.map(async (target: LighthouseTarget) => {
       const response = await fetch(
