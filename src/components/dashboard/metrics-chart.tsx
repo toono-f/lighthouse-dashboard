@@ -35,6 +35,8 @@ type DatasetVisibility = {
   [key: string]: boolean;
 };
 
+// TODO: 日付・時刻が日本時間で表示されるようにしたい
+
 export const MetricsChart = ({ data }: MetricsChartProps) => {
   // データセットの表示状態を管理するuseState
   const [visibleDatasets, setVisibleDatasets] = useState<DatasetVisibility>({
