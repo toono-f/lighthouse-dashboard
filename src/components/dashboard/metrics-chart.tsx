@@ -197,11 +197,11 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
   };
 
   return (
-    <div className="w-full p-8 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
-      <p className="text-2xl font-bold mb-6 text-gray-700 text-center">
+    <div className="w-full p-4 sm:p-8 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
+      <p className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-700 text-center">
         Web Vitals
       </p>
-      <div className="flex flex-wrap gap-3 mb-6 justify-center">
+      <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6 justify-center">
         {chartData.datasets.map((dataset) => (
           <Button
             key={dataset.label}
@@ -210,7 +210,7 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
               visibleDatasets[dataset.label || ""] ? "secondary" : "outline"
             }
             className={`
-              relative transition-all duration-200
+              relative transition-all duration-200 text-xs sm:text-sm px-2 sm:px-4
               ${
                 visibleDatasets[dataset.label || ""]
                   ? "border-2 border-gray-300 bg-gray-100 shadow-sm hover:shadow hover:bg-gray-200"
@@ -221,12 +221,14 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
           >
             <span
               className={`
-                w-3 h-3 rounded-full mr-2 transition-all duration-200
+                w-2 h-2 sm:w-3 sm:h-3 rounded-full mr-1.5 sm:mr-2 transition-all duration-200
                 ${!visibleDatasets[dataset.label || ""] && "opacity-30"}
               `}
               style={{ backgroundColor: dataset.borderColor }}
             />
-            <span className="text-sm font-medium">{dataset.label}</span>
+            <span className="font-medium whitespace-nowrap">
+              {dataset.label}
+            </span>
           </Button>
         ))}
       </div>
