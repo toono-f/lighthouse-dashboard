@@ -207,23 +207,26 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
             key={dataset.label}
             onClick={() => dataset.label && toggleDataset(dataset.label)}
             variant={
-              visibleDatasets[dataset.label || ""] ? "secondary" : "ghost"
+              visibleDatasets[dataset.label || ""] ? "secondary" : "outline"
             }
             className={`
-              border transition-all duration-200
+              relative transition-all duration-200
               ${
                 visibleDatasets[dataset.label || ""]
-                  ? "border-gray-200 shadow-sm hover:shadow"
-                  : "border-gray-100"
+                  ? "border-2 border-gray-300 bg-gray-100 shadow-sm hover:shadow hover:bg-gray-200"
+                  : "border border-gray-200 opacity-50 hover:opacity-90 hover:bg-gray-50"
               }
-              hover:scale-105
+              hover:scale-102 active:scale-98
             `}
           >
             <span
-              className="w-3 h-3 rounded-full mr-2"
+              className={`
+                w-3 h-3 rounded-full mr-2 transition-all duration-200
+                ${!visibleDatasets[dataset.label || ""] && "opacity-30"}
+              `}
               style={{ backgroundColor: dataset.borderColor }}
             />
-            <span className="text-sm">{dataset.label}</span>
+            <span className="text-sm font-medium">{dataset.label}</span>
           </Button>
         ))}
       </div>
