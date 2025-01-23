@@ -54,26 +54,16 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
 
   const labels = sortedData.map((item) => {
     const date = new Date(item.measuredAt);
-    // SPとPCで表示形式を分ける
-    const formatOptions =
-      window.innerWidth < 640
-        ? ({
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            timeZone: "Asia/Tokyo",
-          } as const)
-        : ({
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-            timeZone: "Asia/Tokyo",
-          } as const);
-
-    return new Intl.DateTimeFormat("ja-JP", formatOptions).format(date);
+    // 日付と時刻を日本時間で表示
+    return new Intl.DateTimeFormat("ja-JP", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Tokyo",
+    }).format(date);
   });
 
   const chartData = {
