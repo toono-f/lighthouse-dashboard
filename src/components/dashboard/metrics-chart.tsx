@@ -48,7 +48,13 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
     "FCP (ms)": true,
   });
 
-  const labels = data.map((item) => {
+  // データを日付順に並び替え
+  const sortedData = [...data].sort(
+    (a, b) =>
+      new Date(a.measuredAt).getTime() - new Date(b.measuredAt).getTime()
+  );
+
+  const labels = sortedData.map((item) => {
     const date = new Date(item.measuredAt);
     return date.toLocaleDateString("ja-JP");
   });
@@ -58,7 +64,7 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
     datasets: [
       {
         label: "LCP (ms)",
-        data: data.map((item) => item.lcp),
+        data: sortedData.map((item) => item.lcp),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         tension: 0.4,
@@ -66,7 +72,7 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
       },
       {
         label: "FID (ms)",
-        data: data.map((item) => item.fid),
+        data: sortedData.map((item) => item.fid),
         borderColor: "rgb(75, 192, 255)",
         backgroundColor: "rgba(75, 192, 255, 0.2)",
         tension: 0.4,
@@ -74,7 +80,7 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
       },
       {
         label: "CLS",
-        data: data.map((item) => item.cls),
+        data: sortedData.map((item) => item.cls),
         borderColor: "rgb(75, 220, 192)",
         backgroundColor: "rgba(75, 220, 192, 0.2)",
         tension: 0.4,
@@ -82,7 +88,7 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
       },
       {
         label: "TTFB (ms)",
-        data: data.map((item) => item.ttfb),
+        data: sortedData.map((item) => item.ttfb),
         borderColor: "rgb(153, 102, 255)",
         backgroundColor: "rgba(153, 102, 255, 0.2)",
         tension: 0.4,
@@ -90,7 +96,7 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
       },
       {
         label: "INP (ms)",
-        data: data.map((item) => item.inp),
+        data: sortedData.map((item) => item.inp),
         borderColor: "rgb(255, 159, 64)",
         backgroundColor: "rgba(255, 159, 64, 0.2)",
         tension: 0.4,
@@ -98,7 +104,7 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
       },
       {
         label: "FCP (ms)",
-        data: data.map((item) => item.fcp),
+        data: sortedData.map((item) => item.fcp),
         borderColor: "rgb(72, 192, 72)",
         backgroundColor: "rgba(72, 192, 72, 0.2)",
         tension: 0.4,
