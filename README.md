@@ -10,11 +10,13 @@
 ## セットアップ
 
 1. 依存関係のインストール
+
 ```bash
 npm install
 ```
 
 2. 環境変数の設定
+
 `.env.sample`ファイルを`.env`にコピーし、必要な環境変数を設定してください：
 ```bash
 cp .env.sample .env
@@ -24,13 +26,15 @@ cp .env.sample .env
 - `DATABASE_URL`: データベース接続文字列（PostgreSQLを想定）
 - `GOOGLE_API_KEY`: Google APIキー（PageSpeed Insights APIを利用するため）
 
-1. データベースのセットアップ
+3. データベースのセットアップ
+
 ```bash
 npm run generate  # データベーススキーマの生成
 npm run migrate   # マイグレーションの実行
 ```
 
 4. 計測するページのURLを設定
+
 `src/config/lighthouse-targets.ts`に計測するページのURLを追加してください。
 
 ## 開発手順
