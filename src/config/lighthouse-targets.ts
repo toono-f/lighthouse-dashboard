@@ -21,6 +21,24 @@ const targets: LighthouseTarget[] = [
     pageName: "note",
     pageUrl: "https://note.com/",
   },
+  {
+    // バス比較なび
+    pageId: "buscompare",
+    pageName: "バス比較なび",
+    pageUrl: "https://www.bushikaku.net/search/tokyo_osaka/",
+  },
+  {
+    // 格安移動
+    pageId: "idou",
+    pageName: "格安移動",
+    pageUrl: "https://idou.me/search/all/tokyo/osaka",
+  },
+  {
+    // ツアー
+    pageId: "tour",
+    pageName: "ツアー",
+    pageUrl: "https://tour.bushikaku.net/list?from_prefecture=tokyo",
+  },
   // TODO: 他の計測対象ページをここに追加
 ];
 
