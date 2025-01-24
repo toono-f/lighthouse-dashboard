@@ -30,6 +30,9 @@ npm run generate  # データベーススキーマの生成
 npm run migrate   # マイグレーションの実行
 ```
 
+4. 計測するページのURLを設定
+`src/config/lighthouse-targets.ts`に計測するページのURLを追加してください。
+
 ## 開発手順
 
 開発サーバーの起動
