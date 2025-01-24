@@ -12,11 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0 # Fetch all history for all branches and tags
-
 
       - name: Set up Git config
         run: |
@@ -25,6 +24,7 @@ jobs:
 
       - name: Create empty commit
         run: |
-          git pull --rebase origin main
-          git commit --allow-empty -m "Daily empty commit"
-          git push origin main
+          git pull --rebase origin main || exit 1
+          current_date=$(date '+%Y-%m-%d')
+          git commit --allow-empty -m "Daily empty commit: ${current_date}"
+          git push origin main || { echo "Failed to push changes"; exit 1; }
