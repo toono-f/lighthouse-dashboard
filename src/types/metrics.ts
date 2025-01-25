@@ -6,6 +6,7 @@ type MetricValues = {
   ttfb: number; // Time to First Byte
   inp: number; // Interaction to Next Paint
   fcp: number; // First Contentful Paint
+  performanceScore: number; // Performance Score
 };
 
 // 測定データの型定義

@@ -19,6 +19,7 @@ export async function saveMetrics() {
         ttfb: String(metric.ttfb),
         inp: String(metric.inp),
         fcp: String(metric.fcp),
+        performanceScore: String(metric.performanceScore),
       });
     })
   );
@@ -48,6 +49,7 @@ export async function getMetrics(): Promise<PageMetrics[]> {
           ttfb: Number(metric.ttfb),
           inp: Number(metric.inp),
           fcp: Number(metric.fcp),
+          performanceScore: Number(metric.performanceScore),
         })),
       };
     })
@@ -77,6 +79,8 @@ const collectMetrics = async (
         inp: data.lighthouseResult.audits["interactive"].numericValue,
         fcp: data.lighthouseResult.audits["first-contentful-paint"]
           .numericValue,
+        performanceScore:
+          data.lighthouseResult.categories.performance.score * 100,
       };
     })
   );

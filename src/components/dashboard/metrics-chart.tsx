@@ -38,6 +38,7 @@ type DatasetVisibility = {
 export const MetricsChart = ({ data }: MetricsChartProps) => {
   // データセットの表示状態を管理するuseState
   const [visibleDatasets, setVisibleDatasets] = useState<DatasetVisibility>({
+    "Performance Score": true,
     "LCP (ms)": true,
     "FID (ms)": true,
     CLS: true,
@@ -209,43 +210,115 @@ export const MetricsChart = ({ data }: MetricsChartProps) => {
     ),
   };
 
+  // パフォーマンススコア用のオプション
+  const performanceOptions: ChartOptions<"line"> = {
+    ...options,
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        grid: {
+          color: "rgba(0, 0, 0, 0.08)",
+        },
+        ticks: {
+          color: "#666",
+          padding: 8,
+          font: {
+            size: 11,
+          },
+          stepSize: 10,
+          callback: (value) => value,
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: "#666",
+          padding: 8,
+          font: {
+            size: 11,
+          },
+        },
+      },
+    },
+    plugins: {
+      ...options.plugins,
+      tooltip: {
+        ...options.plugins?.tooltip,
+        callbacks: {
+          label: function (context: TooltipItem<"line">) {
+            const label = context.dataset.label || "";
+            const value = context.parsed.y;
+            return `${label}: ${Math.round(value)}`;
+          },
+        },
+      },
+    },
+  };
+
+  // パフォーマンススコア用のデータ設定
+  const performanceChartData = {
+    labels,
+    datasets: [
+      {
+        label: "Performance Score",
+        data: sortedData.map((item) =>
+          Math.round(Number(item.performanceScore))
+        ),
+        borderColor: "rgb(255, 206, 86)",
+        backgroundColor: "rgba(255, 206, 86, 0.2)",
+        tension: 0.4,
+        borderWidth: 2.5,
+      },
+    ].filter((dataset) => visibleDatasets[dataset.label || ""]),
+  };
+
   return (
     <div className="w-full p-4 sm:p-8 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
       <p className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-700 text-center">
-        Web Vitals
+        Performance Score
       </p>
-      <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6 justify-center">
-        {chartData.datasets.map((dataset) => (
-          <Button
-            key={dataset.label}
-            onClick={() => dataset.label && toggleDataset(dataset.label)}
-            variant={
-              visibleDatasets[dataset.label || ""] ? "secondary" : "outline"
-            }
-            className={`
-              relative transition-all duration-200 text-xs sm:text-sm px-2 sm:px-4
-              ${
-                visibleDatasets[dataset.label || ""]
-                  ? "border-2 border-gray-300 bg-gray-100 shadow-sm hover:shadow hover:bg-gray-200"
-                  : "border border-gray-200 opacity-50 hover:opacity-90 hover:bg-gray-50"
+      <Line data={performanceChartData} options={performanceOptions} />
+
+      <div className="mt-8 pt-8 border-t border-gray-200">
+        <p className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-700 text-center">
+          Web Vitals
+        </p>
+        <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6 justify-center">
+          {chartData.datasets.map((dataset) => (
+            <Button
+              key={dataset.label}
+              onClick={() => dataset.label && toggleDataset(dataset.label)}
+              variant={
+                visibleDatasets[dataset.label || ""] ? "secondary" : "outline"
               }
-              hover:scale-102 active:scale-98
-            `}
-          >
-            <span
               className={`
-                w-2 h-2 sm:w-3 sm:h-3 rounded-full mr-1.5 sm:mr-2 transition-all duration-200
-                ${!visibleDatasets[dataset.label || ""] && "opacity-30"}
+                relative transition-all duration-200 text-xs sm:text-sm px-2 sm:px-4
+                ${
+                  visibleDatasets[dataset.label || ""]
+                    ? "border-2 border-gray-300 bg-gray-100 shadow-sm hover:shadow hover:bg-gray-200"
+                    : "border border-gray-200 opacity-50 hover:opacity-90 hover:bg-gray-50"
+                }
+                hover:scale-102 active:scale-98
               `}
-              style={{ backgroundColor: dataset.borderColor }}
-            />
-            <span className="font-medium whitespace-nowrap">
-              {dataset.label}
-            </span>
-          </Button>
-        ))}
+            >
+              <span
+                className={`
+                  w-2 h-2 sm:w-3 sm:h-3 rounded-full mr-1.5 sm:mr-2 transition-all duration-200
+                  ${!visibleDatasets[dataset.label || ""] && "opacity-30"}
+                `}
+                style={{ backgroundColor: dataset.borderColor }}
+              />
+              <span className="font-medium whitespace-nowrap">
+                {dataset.label}
+              </span>
+            </Button>
+          ))}
+        </div>
+        <Line data={filteredChartData} options={options} />
       </div>
-      <Line data={filteredChartData} options={options} />
     </div>
   );
 };

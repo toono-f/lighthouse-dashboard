@@ -8,6 +8,7 @@ const generateWeekData = (baseValues: {
   ttfb: number;
   inp: number;
   fcp: number;
+  performanceScore: number;
 }) => {
   return Array.from({ length: 7 }).map((_, index) => {
     const date = new Date();
@@ -26,6 +27,9 @@ const generateWeekData = (baseValues: {
       ttfb: Math.round(baseValues.ttfb * randomVariation()),
       inp: Math.round(baseValues.inp * randomVariation()),
       fcp: Math.round(baseValues.fcp * randomVariation()),
+      performanceScore: Math.round(
+        baseValues.performanceScore * randomVariation()
+      ),
     };
   });
 };
@@ -42,6 +46,7 @@ export const dummyMetricsData: PageMetrics[] = [
       ttfb: 800,
       inp: 300,
       fcp: 1200,
+      performanceScore: 80,
     }),
   },
   {
@@ -55,6 +60,7 @@ export const dummyMetricsData: PageMetrics[] = [
       ttfb: 600,
       inp: 250,
       fcp: 1000,
+      performanceScore: 80,
     }),
   },
   {
@@ -68,6 +74,7 @@ export const dummyMetricsData: PageMetrics[] = [
       ttfb: 900,
       inp: 350,
       fcp: 1400,
+      performanceScore: 80,
     }),
   },
   {
@@ -81,6 +88,7 @@ export const dummyMetricsData: PageMetrics[] = [
       ttfb: 700,
       inp: 280,
       fcp: 1100,
+      performanceScore: 80,
     }),
   },
   {
@@ -94,6 +102,7 @@ export const dummyMetricsData: PageMetrics[] = [
       ttfb: 850,
       inp: 320,
       fcp: 1300,
+      performanceScore: 80,
     }),
   },
 ];
