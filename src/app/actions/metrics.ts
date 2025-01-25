@@ -1,5 +1,3 @@
-"use server";
-
 import { db } from "@/lib/db";
 import { metrics } from "@/lib/schema";
 import { desc, eq } from "drizzle-orm";
