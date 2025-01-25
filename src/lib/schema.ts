@@ -22,7 +22,10 @@ export const metrics = pgTable("metrics", {
   id: serial("id").primaryKey(),
   pageId: varchar("page_id", { length: 50 }).notNull(),
   measuredAt: timestamp("measured_at").notNull(),
-  // TODO: performance scoreも追加したい
+  performanceScore: numeric("performance_score", {
+    precision: 5,
+    scale: 2,
+  }),
   lcp: numeric("lcp").notNull(),
   fid: numeric("fid").notNull(),
   cls: numeric("cls", { precision: 5, scale: 3 }).notNull(),

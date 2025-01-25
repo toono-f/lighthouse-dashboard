@@ -22,6 +22,13 @@
       "when": 1737200046806,
       "tag": "0002_thankful_doctor_strange",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1737843769080,
+      "tag": "0003_groovy_wiccan",
+      "breakpoints": true
     }
   ]
 }

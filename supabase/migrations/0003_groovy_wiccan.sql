@@ -1,0 +1,1 @@
+ALTER TABLE "metrics" ADD COLUMN "performance_score" numeric(5, 2);
