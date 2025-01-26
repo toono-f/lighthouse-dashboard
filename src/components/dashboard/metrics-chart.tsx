@@ -15,7 +15,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MetricsData } from "@/types/metrics";
+import { MetricsData } from "@/types";
 
 ChartJS.register(
   CategoryScale,

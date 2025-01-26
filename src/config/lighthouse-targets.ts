@@ -1,4 +1,4 @@
-import { LighthouseTarget } from "@/types/metrics";
+import { LighthouseTarget } from "@/types";
 import { db } from "@/lib/db";
 import { pages } from "@/lib/schema";
 

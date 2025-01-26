@@ -1,4 +1,4 @@
-import { PageMetrics } from "@/types/metrics";
+import { PageMetrics } from "@/types";
 
 // 7日分のデータを生成する関数
 const generateWeekData = (baseValues: {

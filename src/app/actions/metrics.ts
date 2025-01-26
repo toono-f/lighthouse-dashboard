@@ -2,7 +2,8 @@ import { db } from "@/lib/db";
 import { metrics } from "@/lib/schema";
 import { desc, eq } from "drizzle-orm";
 import { syncLighthouseTargets } from "@/config/lighthouse-targets";
-import { ApiMetric, LighthouseTarget, PageMetrics } from "@/types/metrics";
+import { ApiMetric, LighthouseTarget, PageMetrics } from "@/types";
+import { GOOGLE_API_KEY } from "@/lib/config";
 
 export async function saveMetrics() {
   const targets = await syncLighthouseTargets();
@@ -62,7 +63,7 @@ const collectMetrics = async (
   const metrics = await Promise.all(
     targets.map(async (target: LighthouseTarget) => {
       const response = await fetch(
-        `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${target.pageUrl}&key=${process.env.GOOGLE_API_KEY}`
+        `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${target.pageUrl}&key=${GOOGLE_API_KEY}`
       );
       const data = await response.json();
 
